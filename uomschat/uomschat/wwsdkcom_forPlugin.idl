@@ -1,0 +1,555 @@
+// wwsdkcom.idl : IDL source for wwsdkcom
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (wwsdkcom.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+
+interface ISDKObjectCollection;
+
+interface ISDKContactMgr;
+interface ISDKChatDlgMgr;
+interface ISDKLoginUser;
+interface ISDKChatDlg;
+interface ISDKContact;
+interface ISDKIMChatInputToolbarSlot;
+interface ISDKGroup;
+interface ISDKEServiceInputToolbarSlot;
+interface ISDKEServiceDlg;
+
+enum SDKSlotID;
+enum SDKItemNotifyID;
+enum SDKContactStatus;
+
+[
+	object,
+	uuid(3F10F026-1071-4a68-9715-100BB395AEE2),
+	dual,
+	nonextensible,
+	helpstring("ISDKApplication Interface"),
+	pointer_default(unique)
+]
+interface ISDKApplication: IDispatch
+{
+	[id(1), helpstring("method GetContactMgr")] 
+	HRESULT GetContactMgr([in]LONG lCookie, [out,retval] IDispatch** ppContactMgr);
+
+	[id(2), helpstring("method GetMainFrame")]
+	HRESULT GetMainFrame([in]LONG lCookie, [out,retval] IDispatch** ppMainFrame);
+
+	[id(3), helpstring("method GetLoginUser")] 
+	HRESULT GetLoginUser([in]LONG lCookie, [out,retval] IDispatch** ppLoginUser);
+
+	[id(4), helpstring("method GetChatDlgMgr")] 
+	HRESULT GetChatDlgMgr([in]LONG lCookie, [out,retval] IDispatch** ppChatDlgMgr);
+
+	[id(7), helpstring("method BrowseURL")] 
+	HRESULT BrowseURL([in]LONG lCookie, [in] BSTR bstrURL);	
+	[id(8), helpstring("method GetVersion")] 
+	HRESULT GetVersion([in] LONG lCookie, [out] BSTR* bstrDispVersion, [out] LONG *pVersion);
+
+	[id(11), helpstring("method TranslateUrl")] 
+    HRESULT  TranslateUrl([in] LONG lCookie, [in]  BSTR strSrcUrl, [out,retval]BSTR *strDstUrl);
+	
+	[id(12), helpstring("方法GetTribeMgr")] HRESULT GetTribeMgr([in] LONG lCookie, [out,retval] IDispatch** ppTribeMgr);
+	[id(13), helpstring("方法GetTribeDlgMgr")] HRESULT GetTribeDlgMgr([in] LONG lCookie, [out,retval] IDispatch** ppTribeDlgMgr);
+
+	[id(17), helpstring("method GetAppPath")]HRESULT GetAppPath([in] LONG lCookie, [out,retval] BSTR* bstrAppPath);
+	
+	[id(19), helpstring("method GetSessionKey")] HRESULT GetSessionKey([in] LONG lCookie);
+	[id(20), helpstring("method SendMsg")] HRESULT SendMsg([in] LONG lCookie, [in] BSTR targetID, [in] BSTR msgContent, [in]BSTR uuid_flag);
+    [id(24), helpstring("方法GetPluginMainDlg")] HRESULT GetPluginMainDlg([in] LONG lCookie, [out,retval] IDispatch** ppPluginMainDlg);
+    [id(25), helpstring("方法RegisterPreTranslate")] HRESULT RegisterPreTranslate([in] LONG lCookie, [in] LONG_PTR callbackFunc);
+	[id(26), helpstring("方法GetEServiceProperty")] HRESULT GetEServiceProperty([in] LONG lCookie, [out,retval] IDispatch** ppEServiceProperty);
+	[id(27), helpstring("方法AddIP")] HRESULT AddIP([in] LONG lCookie, [in] LONG lIpAddr);
+    [id(28), helpstring("方法GetWWProxySetting")] HRESULT GetWWProxySetting([in] LONG lCookie, [out,retval] BSTR* proxySetting);
+};
+
+[
+	object,
+	uuid(2407B285-EABE-4940-9201-6FA0E765C32F),
+	dual,
+	nonextensible,
+	helpstring("ISDKContactMgr Interface"),
+	pointer_default(unique)
+]
+interface ISDKContactMgr : IDispatch{
+	[id(1), helpstring("method GetApplication")] HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+	[id(2), helpstring("method GetContact")] HRESULT GetContact([in] LONG lCookie, [in] BSTR bstrContactUID, [out,retval] IDispatch** ppContact);
+	[id(3), helpstring("method GetRecentContactCollection")] HRESULT GetRecentContactCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppRecentContactCollection);
+	[id(4), helpstring("method Get2rContactCollection")] HRESULT GetFilterContactCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppFilterContactCollection);
+	[id(5), helpstring("method GetStrangerContactCollection")] HRESULT GetStrangerContactCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppStrangerContactCollection);
+	[id(6), helpstring("method GetRootGroup")] HRESULT GetRootGroup([in] LONG lCookie, [out,retval] IDispatch** ppGroupObj);
+	[id(7), helpstring("method GetGroup")] HRESULT GetGroup([in] LONG lCookie, [in] BSTR sGroupID, [out,retval] IDispatch** ppGroupObj);
+	[id(8), helpstring("method GetContactCount")] HRESULT GetContactCount([in] LONG lCookie, [in] BSTR sGroupID, [in]VARIANT_BOOL vbRecursive,[out,retval] LONG* pContactCnt);
+	[id(9), helpstring("method GetContactIDList")] HRESULT GetContactIDList([in] LONG lCookie, [in] BSTR sGroupID,[in]VARIANT_BOOL vbRecursive, [out,retval] BSTR* pbstrContacts);
+};
+
+[
+	object,
+	uuid(CF93245E-17D7-48ba-9678-DB25B9A0ABCD),
+	dual,
+	nonextensible,
+	helpstring("ISDKLoginUser Interface"),
+	pointer_default(unique)
+]
+interface ISDKLoginUser : IDispatch
+{
+	[id(1), helpstring("method GetUserID")] HRESULT GetUserID([in] LONG lCookie,[out,retval] BSTR* pbstrUID);
+	[id(3), helpstring("method GetSiteID")] HRESULT GetSiteID([in] LONG lCookie,[out,retval] BSTR* pbstrSiteID);
+	[id(4), helpstring("method GetSiteName")] HRESULT GetSiteName([in] LONG lCookie,[out,retval] BSTR* pbstrSiteName);
+	[id(5), helpstring("method GetNickName")] HRESULT GetNickName([in] LONG lCookie,[out,retval] BSTR* pbstrNickName);
+	[id(6), helpstring("method GetActivitiesLevel")] HRESULT GetActivitiesLevel([in] LONG lCookie,[out,retval] LONG* pLevel);
+	[id(7), helpstring("method GetServerTime")] HRESULT GetServerTime([in] LONG lCookie,[out,retval] BSTR* pTime);	
+};
+
+[
+	object,
+	uuid(685D5C4D-8366-4CF5-9697-859396AB3A28),
+	dual,
+	nonextensible,
+	helpstring("ISDKEServiceDlg 接口"),
+	pointer_default(unique)
+]
+interface ISDKEServiceDlg : IDispatch{
+	[id(1), helpstring("method GetActiveContact")] HRESULT GetActiveContact([in] LONG lCookie, [out,retval] IDispatch** ppContact);
+	[id(2), helpstring("method GetApplication")] HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+	[id(3), helpstring("method GetInputToolbarSlot")] HRESULT GetInputToolbarSlot([in] LONG lCookie, [out,retval] IDispatch** ppInputToolbarSlot);
+	[id(4), helpstring("method InsertText2InputBox")] HRESULT InsertText2InputBox([in] LONG lCookie, [in] BSTR bstrUID, [in] BSTR bstrText, [in] LONG nType);
+	[id(5), helpstring("method InsertText2HistoryBox")] HRESULT InsertText2HistoryBox([in] LONG lCookie, [in] BSTR contact_id,
+        [in] BSTR notify_content, [in] LONG callbackId, [in] BSTR bstrCBBtnInfo, [in] VARIANT_BOOL bneedCallback, [in] VARIANT_BOOL bSysStyle);
+	[id(6), helpstring("method GetChildWndPos")] HRESULT GetChildWndPos([in] LONG lCookie, [in] LONG type, [out] LONG* x, [out] LONG* y, [out] LONG* dx, [out] LONG* dy);
+	[id(7), helpstring("method GetAllContacts")] HRESULT GetAllContacts([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppContactCollection);
+	[id(8), helpstring("method ReplaceWordInInputBox")] HRESULT ReplaceWordInInputBox([in] LONG lCookie, [in] LONG lStart, [in] LONG lEnd, [in] BSTR bstrOld, [in] BSTR bstrNew);
+	[id(9), helpstring("method TransferContact")] HRESULT TransferContact([in] LONG lCookie, [in] BSTR contactID, [in] BSTR targetID);
+};
+
+[
+	object,
+	uuid(8AF53472-56D3-4838-BD3C-E8284E5C8D22),
+	dual,
+	nonextensible,
+	helpstring("ISDKChatDlgMgr Interface"),
+	pointer_default(unique)
+]
+
+interface ISDKChatDlgMgr : IDispatch{
+	[id(1), helpstring("method GetChatDlgByUID")] 
+	HRESULT GetChatDlgByUID([in] LONG lCookie, [in] BSTR bstrUID, [out,retval] IDispatch** ppChatDlg);
+
+	[id(2), helpstring("method GetApplication")] 
+	HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+
+	[id(3), helpstring("method GetChatDlgCollection")] 
+	HRESULT GetChatDlgCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppChatDlgCollection);
+
+	[id(4), helpstring("method GetEServiceDlg")] 
+	HRESULT GetEServiceDlg([in] LONG lCookie, [out,retval] IDispatch** ppChatDlg);
+};
+
+[
+	object,
+	uuid(1AE3F1AB-06ED-42C6-AEBB-87DA831BF73B),
+	dual,
+	nonextensible,
+	helpstring("ISDKObjectCollection Interface"),
+	pointer_default(unique)
+]
+interface ISDKObjectCollection : IDispatch{
+	[propget, id(1), helpstring("propert Count")] 
+	HRESULT Count([out, retval] LONG* lpCount);
+
+	[id(2), helpstring("method Add")] 
+	HRESULT Add([in] VARIANT var);
+
+	[id(3), helpstring("method Remove")] 
+	HRESULT Remove([in] LONG lIndex);
+
+	[id(4), helpstring("method RemoveAll")] 
+	HRESULT RemoveAll();
+
+	[propget,id(DISPID_VALUE)]
+	HRESULT Item([in] LONG lIndex , [out,retval] VARIANT* pVar);
+
+	[propget,id(DISPID_NEWENUM)]
+	HRESULT _NewEnum([out,retval] IEnumVARIANT** ppEnum);
+};
+
+[
+	object,
+	uuid(7974CE15-A974-48ce-AD3F-19C0A7F715DE),
+	dual,
+	nonextensible,
+	helpstring("ISDKSlot Interface"),
+	pointer_default(unique)
+]
+interface ISDKSlot : IDispatch{
+	[id(100), helpstring("method ShowItem")] HRESULT ShowItem([in] VARIANT_BOOL bShow, [in] LONG lItemCookie);
+	[id(101), helpstring("method EnableItem")] HRESULT EnableItem([in] VARIANT_BOOL bEnable, [in] LONG lItemCookie);
+};
+
+[
+	object,
+	uuid(A6084910-ACFE-49ce-9B76-B871CC227FF6),
+	dual,
+	nonextensible,
+	helpstring("ISDKChatDlg Interface"),
+	pointer_default(unique)
+]
+interface ISDKChatDlg : IDispatch{
+	[id(1), helpstring("method GetActiveContact")] HRESULT GetActiveContact([in] LONG lCookie, [out,retval] IDispatch** ppContact);
+	[id(2), helpstring("method GetApplication")] HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+	[id(3), helpstring("method GetMainToolbarSlot")] HRESULT GetMainToolbarSlot([in] LONG lCookie, [out,retval] IDispatch** ppMainToolbarSlot);
+	[id(4), helpstring("method GetInputToolbarSlot")] HRESULT GetInputToolbarSlot([in] LONG lCookie, [out,retval] IDispatch** ppInputToolbarSlot);
+	[id(5), helpstring("method InsertText2InputBox")] HRESULT InsertText2InputBox([in] LONG lCookie, [in] BSTR bstrUID, [in] BSTR bstrText, [in] LONG nType);
+	[id(6), helpstring("插入插件的通知消息")] HRESULT InsertText2HistoryBox([in] LONG lCookie, [in] BSTR contact_id, [in] BSTR notify_content,
+        [in] LONG callbackId, [in] BSTR bstrCBBtnInfo, [in] VARIANT_BOOL bneedCallback, [in] VARIANT_BOOL bSysStyle);
+	[id(7), helpstring("获取扩展区")] HRESULT GetExternRegion([in] LONG lCookie, [out,retval] IDispatch** ppExternRegion);
+	[id(11), helpstring("获取聊天窗口的各子窗口区域")] HRESULT GetChatDlgChildWindowSize([in] LONG lCookie, [in] BSTR contact_id, 
+        [in] LONG childtype, [out] LONG* x, [out] LONG* y, [out] LONG* dx, [out,retval] LONG* dy);
+};
+[
+	object,
+	uuid(9DAE5A43-9FF4-4ce0-A00D-E92A2E2C425A),
+	dual,
+	nonextensible,
+	helpstring("ISDKContact Interface"),
+	pointer_default(unique)
+]
+interface ISDKContact : IDispatch{	
+	[id(1), helpstring("method GetUserID")] HRESULT GetUserID([in] LONG lCookie, [out,retval] BSTR* pbstrUID);	
+	[id(2), helpstring("method GetNickName")] HRESULT GetNickName([in] LONG lCookie, [out,retval] BSTR* pNickName);
+	[id(3), helpstring("method GetSiteID")] HRESULT GetSiteID([in] LONG lCookie, [out,retval] BSTR* pSiteID);
+	[id(4), helpstring("method GetSiteName")] HRESULT GetSiteName([in] LONG lCookie, [out,retval] BSTR* pSiteName);
+	[id(5), helpstring("method GetInGroup")] HRESULT GetInGroup([in] LONG lCookie, [out,retval] IDispatch** ppGroup);
+	[id(6), helpstring("method GetStatus")] HRESULT GetStatus([in] LONG lCookie, [out,retval] enum SDKContactStatus* lpStatus);
+	[id(7), helpstring("method GetPortrait")] HRESULT GetPortrait([in] LONG lCookie,
+										[in]LONG lImageSizeType,
+										[in]LONG lIgnoreStatus,
+										[out,retval] BSTR* pbstrPortrait);
+
+	[id(8), helpstring("method GetStatusImage")] HRESULT GetStatusImage([in] LONG lCookie,
+										[out,retval] BSTR* pbstrImage);
+};
+
+[
+	object,
+	uuid(275CC9B8-0CA2-478c-812F-F4E42C06F1D0),
+	dual,
+	nonextensible,
+	helpstring("ISDKIMChatInputToolbarSlot Interface"),
+	pointer_default(unique)
+]
+interface ISDKIMChatInputToolbarSlot : ISDKSlot{	
+	[id(10), helpstring("method GetChatDlg")] HRESULT GetChatDlg([in] LONG lCookie, [out,retval] IDispatch** ppChatDlg);
+	[id(11), helpstring("method GetApplication")] HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+};
+
+[
+	object,
+	uuid(E7315843-A3C1-4081-9747-5FB92EC36F0F),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyOffline Interface"),
+	pointer_default(unique)
+]
+interface ISDKNotifyOffline : IDispatch{
+};
+
+[
+	object,
+	uuid(9E1DA6CB-30E2-45ED-88D1-5324F4DF0C1D),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyChatMessage 接口"),
+	pointer_default(unique)
+]
+interface ISDKNotifyChatMessage : IDispatch{
+	[propget, id(1), helpstring("属性 userId")] HRESULT userId([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("属性 userId")] HRESULT userId([in] BSTR newVal);
+	[propget, id(2), helpstring("属性 textMessage")] HRESULT textMessage([out, retval] BSTR* pVal);
+	[propput, id(2), helpstring("属性 textMessage")] HRESULT textMessage([in] BSTR newVal);
+	[propget, id(3), helpstring("属性 receive")] HRESULT receive([out, retval] VARIANT_BOOL* pVal);
+	[propput, id(3), helpstring("属性 receive")] HRESULT receive([in] VARIANT_BOOL newVal);
+	[propget, id(4), helpstring("属性 time")] HRESULT time([out, retval] ULONGLONG* pVal);
+	[propput, id(4), helpstring("属性 time")] HRESULT time([in] ULONGLONG newVal);
+	[propget, id(5), helpstring("属性 type")] HRESULT type([out, retval] LONG* pVal);
+	[propput, id(5), helpstring("属性 type")] HRESULT type([in] LONG newVal);
+};
+[
+	object,
+	uuid(B3888974-4B4B-4DD3-CD3A-E9956B72CC23),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyPlugMessage 接口"),
+	pointer_default(unique)
+]
+interface ISDKNotifyPlugMessage : IDispatch{
+	[propget, id(1), helpstring("属性 NotifyMessage")] HRESULT NotifyMessage([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("属性 NotifyMessage")] HRESULT NotifyMessage([in] BSTR newVal);
+};
+
+[
+	object,
+	uuid(B7E2380A-8C04-4E41-8418-3ED3F9A34000),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyContactTabChanging Interface"),
+	pointer_default(unique)
+]
+interface ISDKNotifyContactTabChanging : IDispatch{
+	[propget, id(1), helpstring("property OldContact")] HRESULT OldContact([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property OldContact")] HRESULT OldContact([in] BSTR newVal);
+	[propget, id(2), helpstring("property NewContact")] HRESULT NewContact([out, retval] BSTR* pVal);
+	[propput, id(2), helpstring("property NewContact")] HRESULT NewContact([in] BSTR newVal);
+};
+[
+	object,
+	uuid(1D9285ED-C9E8-40D4-8149-8EC3221DAA37),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyContactTabChanged Interface"),
+	pointer_default(unique)
+]
+interface ISDKNotifyContactTabChanged : IDispatch{
+	[propget, id(1), helpstring("property OldContact")] HRESULT OldContact([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property OldContact")] HRESULT OldContact([in] BSTR newVal);
+	[propget, id(2), helpstring("property NewContact")] HRESULT NewContact([out, retval] BSTR* pVal);
+	[propput, id(2), helpstring("property NewContact")] HRESULT NewContact([in] BSTR newVal);
+};
+
+[
+	object,
+	uuid(B8423503-8FAE-4090-8BA4-EFF1B8564261),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyContactInputboxContentChanged Interface"),
+	pointer_default(unique)
+]
+interface ISDKNotifyContactInputboxContentChanged : IDispatch{
+	[propget, id(1), helpstring("property NewContent")] HRESULT NewContent([out, retval] BSTR* pVal);
+	[propput, id(1), helpstring("property NewContent")] HRESULT NewContent([in] BSTR newVal);
+	[propget, id(2), helpstring("property StartPos")] HRESULT StartPos([out, retval] LONG* pVal);
+	[propput, id(2), helpstring("property StartPos")] HRESULT StartPos([in] LONG newVal);
+};
+
+[
+	object,
+	uuid(6586EF06-F071-4944-8D13-1C198B943A47),
+	dual,
+	nonextensible,
+	helpstring("ISDKGroup 接口"),
+	pointer_default(unique)
+]
+interface ISDKGroup : IDispatch{
+	[id(1), helpstring("method GetParentGroup")] HRESULT GetParentGroup([in] LONG lCookie, [out,retval] IDispatch** ppSDKGroup);
+	[id(2), helpstring("method GetSubGroupCollection")] HRESULT GetSubGroupCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppGroupCollection);
+	[id(3), helpstring("method GetContactCollection")] HRESULT GetContactCollection([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppContactCollection);
+	[id(4), helpstring("method GetGroupID")] HRESULT GetGroupID([in] LONG lCookie, [out,retval] BSTR* pGroupID);
+	[id(5), helpstring("method GetGroupName")] HRESULT GetGroupName([in] LONG lCookie, [out,retval] BSTR* pGroupName);
+	[id(6), helpstring("method GetOrderedGroups")] HRESULT GetOrderedGroups([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppGroupCollection);
+	[id(7), helpstring("method GetOrderedContacts")] HRESULT GetOrderedContacts([in] LONG lCookie, [out,retval] ISDKObjectCollection** ppContactCollection);
+};
+[
+	object,
+	uuid(3391FB33-9338-4635-88E2-27ADBBAD849F),
+	dual,
+	nonextensible,
+	helpstring("ISDKEServiceInputToolbarSlot 接口"),
+	pointer_default(unique)
+]
+interface ISDKEServiceInputToolbarSlot : ISDKSlot{
+	[id(1), helpstring("method GetChatDlg")] HRESULT GetChatDlg([in] LONG lCookie, [out,retval] IDispatch** ppChatDlg);
+	[id(2), helpstring("method GetApplication")] HRESULT GetApplication([in] LONG lCookie, [out,retval] IDispatch** ppApplication);
+};
+[
+	object,
+	uuid(670E0F43-BEDE-4804-A30D-B9C4B942C34D),
+	dual,
+	nonextensible,
+	helpstring("ISDKCommonParam 接口"),
+	pointer_default(unique)
+]
+interface ISDKCommonParam : IDispatch{
+	[id(1), helpstring("method Set_Param")] HRESULT Set_Param([in] const VARIANT* var);
+	[id(2), helpstring("method Get_Param")] HRESULT Get_Param([out, retval] VARIANT* var);
+};
+
+[
+	object,
+	uuid(E207A678-6F94-4CEA-A605-CB91B9F9617D),
+	dual,
+	nonextensible,
+	helpstring("ISDKPluginMainDlg 接口"),
+	pointer_default(unique)
+]
+interface ISDKPluginMainDlg : IDispatch{
+    [id(1), helpstring("方法GetHwnd")] HRESULT GetHwnd([in] LONG lPluginCookie, [out,retval] LONGLONG* pVal);
+    [id(2), helpstring("方法StartPluginMainDlg")] HRESULT StartPluginMainDlg([in] LONG lPluginCookie);
+    [id(3), helpstring("方法ShowPluginMainDlg")] HRESULT ShowPluginMainDlg([in] LONG lPluginCookie, [in] VARIANT_BOOL bShow);
+    [id(4), helpstring("方法SetPluginDlgPos")] HRESULT SetPluginDlgPos([in] LONG lPluginCookie, [in] LONG x, [in] LONG y, [in] LONG cx,
+        [in] LONG cy, [in] LONG flag);
+    [id(5), helpstring("方法SetPluginDlgFixedBorder")] HRESULT SetPluginDlgFixedBorder([in] LONG lPluginCookie);
+    [id(6), helpstring("方法SetPluginDlgBOOLProperty")] HRESULT SetPluginDlgBOOLProperty([in] LONG lPluginCookie, [in] BSTR propertyName, [in] VARIANT_BOOL bVal);
+    [id(7), helpstring("方法SetPluginDlgINTProperty")] HRESULT SetPluginDlgINTProperty([in] LONG lPluginCookie, [in] BSTR propertyName, [in] LONG bVal);
+    [id(8), helpstring("方法SetPluginDlgStringProperty")] HRESULT SetPluginDlgStringProperty([in] LONG lPluginCookie, [in] BSTR propertyName, [in] BSTR bVal);
+    [id(9), helpstring("方法IsCurrentSelectedPlugin")] HRESULT IsCurrentSelectedPlugin([in] LONG lPluginCookie, [out,retval] VARIANT_BOOL* pVal);
+};
+
+[
+	object,
+	uuid(EAE07C36-5D44-442A-8130-177DA03E8BB9),
+	dual,
+	nonextensible,
+	helpstring("ISDKNotifyTradeInfo 接口"),
+	pointer_default(unique)
+]
+interface ISDKNotifyTradeInfo : IDispatch{
+	[propget, id(1), helpstring("属性 type")] HRESULT type([out, retval] LONG* pVal);
+	[propput, id(1), helpstring("属性 type")] HRESULT type([in] LONG newVal);
+	[propget, id(2), helpstring("属性 gids")] HRESULT gids([out, retval] IUnknown** pVal);
+	[propput, id(2), helpstring("属性 gids")] HRESULT gids([in] IUnknown* newVal);
+    [propget, id(3), helpstring("属性 user")] HRESULT user([out, retval] BSTR* pVal);
+	[propput, id(3), helpstring("属性 user")] HRESULT user([in] BSTR newVal);
+};
+[
+	object,
+	uuid(5704D7C5-F460-4B9C-AB44-56312E5FB28B),
+	dual,
+	nonextensible,
+	helpstring("ISDKEServiceProperty 接口"),
+	pointer_default(unique)
+]
+interface ISDKEServiceProperty : IDispatch{
+	[id(1), helpstring("方法GetHangupStatus")] HRESULT GetHangupStatus([in] LONG lPluginCookie,  [out, retval] VARIANT_BOOL* pbHungUp);
+	[id(2), helpstring("方法SetHangupStatus")] HRESULT SetHangupStatus([in] LONG lPluginCookie,  [in] VARIANT_BOOL bHungUp);
+
+};
+[
+	uuid(044FEC04-C415-40AF-AD34-F44F62DA65A3),
+	version(1.0),
+	helpstring("wwsdkcom 1.0 Type Library")
+]
+library wwsdkcomLib
+{
+	importlib("stdole2.tlb");
+
+	enum SDKSlotID
+	{
+		// 聊天对话框输入工具条slotID
+		SLOTID_IMCHATINPUTTOOLBARSLOT	= 4,
+
+		SLOTID_ESERVICEINPUTTOOLBARSLOT = 10,
+
+	};
+
+	enum SDKMessageID
+	{
+		// IM用户登出或者离线，被踢等
+		NOTIFY_OFFLINE	= 1,
+
+		//! 即时消息
+		NOTIFY_CHATMESSAGE = 3,
+
+ 		NOTIFY_SESSION_KEY = 30,			// 从top 获取session key
+		NOTIFY_PLUGIN_MSG_BACK = 31,		// 插件发消息返回信息
+		NOTIFY_PLUGIN_CALLBACK = 32,		// 界面消息框回调
+		NOTIFY_ESERVICE_HANGUP_BACK = 33,	// E客服挂起状态返回
+
+        // 新增工作台消息通知
+        NOTIFY_WORKBENCH_OPEN = 40,
+        NOTIFY_WORKBENCH_CLOSE = 41,
+        // 通知插件为其分配的主窗口已经创建并调整完毕
+        NOTIFY_PLUGIN_MAINDLG_READY = 42,
+        NOTIFY_PLUGIN_TAB_ACTIVED  = 43,
+        NOTIFY_PLUGIN_TAB_WNDSIZED  = 44,
+	};
+
+	enum SDKItemNotifyID
+	{
+		//合并聊天窗口，用户切换，接发消息（提供给IPluginItem::OnNotify())
+		NOTIFY_CONTACT_TAB_CHANGING = 0,
+		NOTIFY_CONTACT_TAB_CHANGED = 1,
+		
+		NOTIFY_TRADE_FOCUS	= 6, // 收到交易焦点
+		NOTIFY_CONTACT_CLOSE = 7, // 关闭联系人
+		NOTIFY_CONTACT_INPUTBOX_CONTENT_CHANGED = 8, //输入内容变更
+		NOTIFY_TRANSFER_CONTACT = 9, // 工作台转发联系人
+		NOTIFY_ESERVICE_DLG_SIZE_CHANGE = 10, // 工作台大小变更
+		NOTIFY_ESERVICE_PLUGIN_HOTKEY = 11, // 工作台快捷键
+	};
+
+	enum SDKContactStatus
+	{
+		STATUS_OFFLINE = 0,
+		STATUS_ONLINE = 1,
+		STATUS_MOBILEONLINE = 2,			
+		STATUS_BUSY = 3,
+		STATUS_AWAY = 4,
+		STATUS_INCALL = 5,
+		STATUS_OUTFORDINNER = 6,
+		STATUS_WAIT = 7,
+	};
+
+	enum TradeInfoType 
+	{
+		TRADE_INFO_TYPE_ORDER,
+		TRADE_INFO_TYPE_GOODS,
+	};
+
+	enum ChatMsgType
+	{
+		CHAT_MSG_NORMAL,
+		CHAT_MSG_AUTOREPLY,
+		CHAT_MSG_PLUGIN,
+	};
+	
+    enum SDKProxyType
+    {
+        SDK_None_ProxyType = 0,
+        SDK_Socket4_ProxyType,
+        SDK_Socket4A_ProxyType,
+        SDK_Socket5_ProxyType,
+        SDK_Http11_ProxyType,
+        SDK_IE_ProxyType,
+    };
+
+	[
+		object,
+		uuid(205D5A1E-B245-43dc-A7C5-C0C6D663C164),
+		dual,
+		nonextensible,
+		helpstring("ISDKPlugin2 Interface"),
+		pointer_default(unique)
+	]
+	interface ISDKPlugin2 : IDispatch{
+		[id(1), helpstring("method OnConnect")] HRESULT OnConnect([in] IDispatch* pApplication2, [in] LONG lCookie);
+		[id(2), helpstring("method OnDisconnect")] HRESULT OnDisconnect([in] IDispatch* pApplication2, [in] LONG lCookie);
+		[id(3), helpstring("method OnNotify")] HRESULT OnNotify([in] enum SDKMessageID MsgID, [in] IDispatch* pParam);
+		[id(4), helpstring("method OnUninstall")] HRESULT OnUninstall();
+	};
+
+	[
+		object,
+		uuid(62BF5E6F-9FAA-4083-AC26-771C64C3E203),
+		dual,
+		nonextensible,
+		helpstring("ISDKPluginItem Interface"),
+		pointer_default(unique)
+	]
+	interface ISDKPluginItem : IDispatch{
+		[id(1), helpstring("method OnCreate")] HRESULT OnCreate([in] IDispatch* pSlot, [in] LONG /*HWND */ hParentWnd , [in] LONG lItemCookie);
+
+		[id(2), helpstring("method OnDestroy")] HRESULT OnDestroy();
+
+		[id(3), helpstring("method OnNotify")] HRESULT OnNotify([in] enum SDKItemNotifyID MsgID, [in] IDispatch* pParam);
+
+		[id(4), helpstring("method OnClick")] HRESULT OnClick();
+
+		[id(5), helpstring("method OnSize")] HRESULT OnSize([in]int cx, [in]int cy);
+
+		[id(6), helpstring("method OnMenuClick")] HRESULT OnMenuClick([in] LONG lCmdID);
+	};
+};

@@ -1,0 +1,29 @@
+import "oaidl.idl";
+import "ocidl.idl";
+import "wwsdkcom_forPlugin.idl";
+
+interface IMessageListener;
+[
+	object,
+	uuid(102947DB-3258-43D8-953C-5F64F51FBF1E),
+	dual,
+	nonextensible,
+	helpstring("信息事件提供者"),
+	pointer_default(unique)
+]
+interface IMessageSource: IUnknown {
+	[id(1), helpstring("登记监听信息事件")] HRESULT AddListener([in] IMessageListener *pListener);
+	[id(2), helpstring("取消监听信息事件")] HRESULT RemoveListener([in] IMessageListener *pListener);
+};
+
+[
+	object,
+	uuid(FABF9E4E-E533-4826-A76B-046FC0D070D5),
+	dual,
+	nonextensible,
+	helpstring("信息事件接收者"),
+	pointer_default(unique)
+]
+interface IMessageListener: IUnknown {
+	[id(1), helpstring("信息事件")] HRESULT OnMessage([in] enum SDKMessageID MsgID, [in] IDispatch *pParam);
+};

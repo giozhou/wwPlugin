@@ -1,0 +1,22 @@
+HKCU
+{
+	NoRemove Software
+	{
+		NoRemove Classes
+		{
+			NoRemove CLSID
+			{
+				ForceRemove {9F2A7386-C01C-4AB5-828C-DD428D43BB81} = s 'PluginItemHost Class'
+				{
+					ForceRemove Programmable
+					InprocServer32 = s '%MODULE%'
+					{
+						val ThreadingModel = s 'Apartment'
+					}
+					TypeLib = s '{D6FE3A96-4559-486D-AF69-1CD0BF0285A8}'
+					Version = s '1.0'
+				}
+			}
+		}
+	}
+}

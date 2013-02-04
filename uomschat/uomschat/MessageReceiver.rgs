@@ -1,0 +1,22 @@
+HKCU
+{
+	NoRemove Software
+	{
+		NoRemove Classes
+		{
+			NoRemove CLSID
+			{
+				ForceRemove {B737AAF5-0A73-49A2-BF6A-F5DFA470A847} = s 'MessageReceiver Class'
+				{
+					ForceRemove Programmable
+					InprocServer32 = s '%MODULE%'
+					{
+						val ThreadingModel = s 'Both'
+					}
+					TypeLib = s '{D6FE3A96-4559-486D-AF69-1CD0BF0285A8}'
+					Version = s '1.0'
+				}
+			}
+		}
+	}
+}

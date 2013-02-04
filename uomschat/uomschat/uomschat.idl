@@ -1,0 +1,36 @@
+// uomschat.idl : IDL source for uomschat
+//
+
+// This file will be processed by the MIDL tool to
+// produce the type library (uomschat.tlb) and marshalling code.
+
+import "oaidl.idl";
+import "ocidl.idl";
+import "wwsdkcom_forPlugin.idl";
+import "messaging.idl";
+
+[
+	uuid(D6FE3A96-4559-486D-AF69-1CD0BF0285A8),
+	version(1.0),
+]
+library uomschatLib
+{
+	[
+		uuid(9F2A7386-C01C-4AB5-828C-DD428D43BB81)		
+	]
+	coclass PluginItemHost
+	{
+		[default] interface ISDKPluginItem;
+		interface IMessageListener;
+	};
+	[		
+		uuid(B737AAF5-0A73-49A2-BF6A-F5DFA470A847)		
+	]
+	coclass MessageReceiver
+	{
+		[default] interface ISDKPlugin2;
+		interface IMessageSource;
+	};
+};
+
+import "shobjidl.idl";

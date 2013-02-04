@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Plugin>
+  <!-- 申请到的插件APPKEY -->
+  <AppID>21378592</AppID>
+  <!-- 插件的名称 -->
+  <Name>测试单聊的插件接口</Name>
+  <!-- 插件的版本, 必须和网站上填入的版本一致 -->
+  <Version>1.0.0</Version>
+  <!-- 插件用于卖家版,必须为2 -->
+  <LoadOption>2</LoadOption>
+  <!-- 用户群, 淘宝用户, 必须为2 -->
+  <SiteCompatible>2</SiteCompatible>
+  <WWSDK_Version>5400</WWSDK_Version>
+  <!-- 插件dll的类型信息, 对应于rgs文件中的TypeLib字段 -->
+  <EserviceDepend>false</EserviceDepend>
+  <TypeLibs>
+    <TypeLib ID="{D6FE3A96-4559-486D-AF69-1CD0BF0285A8}">uomschat.dll</TypeLib>
+  </TypeLibs>
+  <InprocServer32>
+    <Default>uomschat.dll</Default>
+    <!--MessageReceiver Class-->
+    <CLSID>{B737AAF5-0A73-49A2-BF6A-F5DFA470A847}</CLSID>
+    <ThreadingModel>Apartment</ThreadingModel>
+  </InprocServer32>
+  <Network>
+    <Allow>
+      <Item>google.com</Item>
+      <Item>google.com.hk</Item>
+    </Allow>
+  </Network>
+  <Message_IDs>
+    <ID>NOTIFY_PLUGIN_MAINDLG_READY</ID>
+    <ID>NOTIFY_PLUGIN_TAB_WNDSIZED</ID>
+  </Message_IDs>
+  <!-- 插件实现的所有插槽项 -->
+  <Items>
+    <Item ID="0">
+      <!-- 单聊输入框插槽标识, 如果需要插入到其他插槽则设置成对应的插槽标识即可 -->
+      <Insert_Slot>SLOT_ESERVICE_INPUT_TOOLBAR</Insert_Slot>
+      <Name>测试单聊插件接口</Name>
+      <Title>测试单聊插件接口</Title>
+      <Tip>调用大部分接口</Tip>
+      <Message_IDs>
+        <ID>NOTIFY_CONTACT_TAB_CHANGED</ID>
+      </Message_IDs>
+      <!-- 插槽图标的一些参数, 图片的态数, 图标的大小, 图标偏移位置等 -->
+      <Option StateCount="1" Width="72" Height="72" ></Option>
+      <Image>icon.png</Image>
+      <!-- 插槽按钮风格, 目前只支持设置为STYLE_BUTTON -->
+      <Style>STYLE_BUTTON</Style>
+      <!-- 该插槽的类对象信息, 对应于实现该插槽类对象的CLSID, 可以在类对象的rgs文件中找到 -->
+      <InprocServer32>
+        <Default>uomschat.dll</Default>
+        <!--PluginItemHost Class-->
+        <CLSID>{9F2A7386-C01C-4AB5-828C-DD428D43BB81}</CLSID>
+        <ThreadingModel>Apartment</ThreadingModel>
+      </InprocServer32>
+    </Item>
+  </Items>
+</Plugin>
