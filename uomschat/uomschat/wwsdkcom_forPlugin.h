@@ -4,7 +4,7 @@
 
 
  /* File created by MIDL compiler version 7.00.0555 */
-/* at Mon Feb 04 18:06:05 2013
+/* at Wed Apr 24 19:54:49 2013
  */
 /* Compiler settings for wwsdkcom_forPlugin.idl:
     Oicf, W1, Zp8, env=Win32 (32b run), target_arch=X86 7.00.0555 

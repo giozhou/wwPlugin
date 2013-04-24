@@ -135,7 +135,7 @@ STDMETHODIMP CPluginItemHost::OnNotify(SDKItemNotifyID MsgID, IDispatch* pParam)
             spInfo->get_NewContact(newContact.GetAddress());
 			if (dialogChat) {
 				CString csNewContact = newContact;
-				dialogChat->Navigate(CComBSTR(_T("http://www.baidu.com/s?wd=") + csNewContact));
+				dialogChat->Navigate(CComBSTR(_T("http://uco.liangyan.net/Ali/cases/") + csNewContact));
 			}
         }
 	}
