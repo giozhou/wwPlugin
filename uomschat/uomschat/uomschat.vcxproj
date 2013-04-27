@@ -45,6 +45,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <IgnoreImportLibrary>true</IgnoreImportLibrary>
     <LinkIncremental>false</LinkIncremental>
+    <TargetName>UcoWWPlugin</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -110,8 +111,8 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
-      <RegisterOutput>true</RegisterOutput>
-      <AdditionalDependencies>comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <RegisterOutput>false</RegisterOutput>
+      <AdditionalDependencies>comsupp.lib;kernel32.lib;user32.lib;gdi32.lib;winspool.lib;comdlg32.lib;advapi32.lib;shell32.lib;ole32.lib;oleaut32.lib;uuid.lib;odbc32.lib;odbccp32.lib;comsvcs.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -165,16 +166,16 @@
   </ItemGroup>
   <ItemGroup>
     <Midl Include="messaging.idl">
-      <HeaderFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">messaging.h</HeaderFileName>
-      <InterfaceIdentifierFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">messaging_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">messaging_p.c</ProxyFileName>
+      <HeaderFileName>messaging.h</HeaderFileName>
+      <InterfaceIdentifierFileName>messaging_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>messaging_p.c</ProxyFileName>
     </Midl>
     <Midl Include="uomschat.idl" />
     <Midl Include="wwsdkcom_forPlugin.idl">
-      <HeaderFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">wwsdkcom_forPlugin.h</HeaderFileName>
-      <InterfaceIdentifierFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">wwsdkcom_forPlugin_i.c</InterfaceIdentifierFileName>
-      <ProxyFileName Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">wwsdkcom_forPlugin_p.c</ProxyFileName>
-      <GenerateTypeLibrary Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</GenerateTypeLibrary>
+      <HeaderFileName>wwsdkcom_forPlugin.h</HeaderFileName>
+      <InterfaceIdentifierFileName>wwsdkcom_forPlugin_i.c</InterfaceIdentifierFileName>
+      <ProxyFileName>wwsdkcom_forPlugin_p.c</ProxyFileName>
+      <GenerateTypeLibrary>false</GenerateTypeLibrary>
       <DeploymentContent>false</DeploymentContent>
     </Midl>
   </ItemGroup>
